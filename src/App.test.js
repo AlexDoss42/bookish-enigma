@@ -87,4 +87,27 @@ test("should show password does not match confirm error message when password an
   const passwordErrorElement = screen.queryByText(/Your password and confirm password do not match./i);
 
   expect(passwordErrorElement).toBeInTheDocument();
-})
+});
+
+test("should show no error message with every input being valid", () => {
+  render(<App />);
+  const emailInputElement = screen.getByRole("textbox", {
+    name: /email/i
+  });
+  const passwordInputElement = screen.getByLabelText("Password");
+  const confirmPasswordInputElement = screen.getByLabelText(/confirm password/i);
+  const submitBtnElement = screen.getByRole("button");
+  
+  userEvent.type(emailInputElement, "test@gmail.com");
+  userEvent.type(passwordInputElement, "strong");
+  userEvent.type(confirmPasswordInputElement, "strong");
+  userEvent.click(submitBtnElement);
+  
+  const emailErrorElementAgain = screen.queryByText(/the email you input is invalid./i);
+  const passwordErrorElement = screen.queryByText(/Your password and confirm password do not match./i);
+  const confirmPasswordErrorElement = screen.queryByText(/Your password and confirm password do not match./i);
+
+  expect(emailErrorElementAgain).not.toBeInTheDocument();
+  expect(passwordErrorElement).not.toBeInTheDocument();
+  expect(confirmPasswordErrorElement).not.toBeInTheDocument();
+});
