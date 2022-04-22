@@ -22,6 +22,7 @@ function App() {
             </label>
             <input type="password" id="confirm-password" name="confirm-password" className="form-control" />
         </div>
+        <button>Submit</button>
       </form>
     </div>
   );
