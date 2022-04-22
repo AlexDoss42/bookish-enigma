@@ -68,4 +68,23 @@ test("should show password error message on too short of password", () => {
   const passwordErrorElement = screen.queryByText(/The password you entered should contain 5 of more characters/i);
 
   expect(passwordErrorElement).toBeInTheDocument();
+});
+
+test("should show password does not match confirm error message when password and confirm password do not match", () => {
+  render(<App />);
+  const emailInputElement = screen.getByRole("textbox", {
+    name: /email/i
+  });
+  const passwordInputElement = screen.getByLabelText("Password");
+  const confirmPasswordInputElement = screen.getByLabelText(/confirm password/i);
+  const submitBtnElement = screen.getByRole("button");
+  
+  userEvent.type(emailInputElement, "test@gmail.com");
+  userEvent.type(passwordInputElement, "strong");
+  userEvent.type(confirmPasswordInputElement, "stron");
+  userEvent.click(submitBtnElement);
+
+  const passwordErrorElement = screen.queryByText(/Your password and confirm password do not match/i);
+
+  expect(passwordErrorElement).toBeInTheDocument();
 })
