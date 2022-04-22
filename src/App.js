@@ -22,6 +22,8 @@ function App() {
     e.preventDefault();
     if(!validator.isEmail(singupInput.email)) {
       setError("the email you input is invalid");
+    } else if(singupInput.password.length < 5) {
+      setError("The password you entered should contain 5 of more characters")
     }
     
   }
