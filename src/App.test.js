@@ -37,7 +37,7 @@ test("should be able to type a confirm password", () => {
 
 test("should show email error message on invalid email", () => {
   render(<App />);
-  const emailErrorElement = screen.queryByText(/the email you input is invalid/i);
+  const emailErrorElement = screen.queryByText(/the email you input is invalid./i);
   const emailInputElement = screen.getByRole("textbox", {
     name: /email/i
   });
@@ -48,7 +48,7 @@ test("should show email error message on invalid email", () => {
   userEvent.type(emailInputElement, "testgmail.com");
   userEvent.click(submitBtnElement);
 
-  const emailErrorElementAgain = screen.queryByText(/the email you input is invalid/i);
+  const emailErrorElementAgain = screen.queryByText(/the email you input is invalid./i);
 
   expect(emailErrorElementAgain).toBeInTheDocument();
 });
@@ -65,7 +65,7 @@ test("should show password error message on too short of password", () => {
   userEvent.type(passwordInputElement, "stro");
   userEvent.click(submitBtnElement);
 
-  const passwordErrorElement = screen.queryByText(/The password you entered should contain 5 of more characters/i);
+  const passwordErrorElement = screen.queryByText(/The password you entered should contain 5 of more characters./i);
 
   expect(passwordErrorElement).toBeInTheDocument();
 });
@@ -84,7 +84,7 @@ test("should show password does not match confirm error message when password an
   userEvent.type(confirmPasswordInputElement, "stron");
   userEvent.click(submitBtnElement);
 
-  const passwordErrorElement = screen.queryByText(/Your password and confirm password do not match/i);
+  const passwordErrorElement = screen.queryByText(/Your password and confirm password do not match./i);
 
   expect(passwordErrorElement).toBeInTheDocument();
 })

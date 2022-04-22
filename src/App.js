@@ -21,11 +21,11 @@ function App() {
   const handleClick = (e) => {
     e.preventDefault();
     if(!validator.isEmail(singupInput.email)) {
-      setError("the email you input is invalid");
+      return setError("the email you input is invalid.");
     } else if(singupInput.password.length < 5) {
-      setError("The password you entered should contain 5 of more characters")
+      return setError("The password you entered should contain 5 of more characters.")
     } else if (singupInput.password !== singupInput.confirmPassword) {
-      setError("Your password and confirm password do not match")
+      return setError("Your password and confirm password do not match.")
     }
     
   }
