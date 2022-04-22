@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import validator from 'validator';
+
 import './App.css';
 
 function App() {
@@ -7,12 +9,21 @@ function App() {
     password: "",
     confirmPassword: ""
   });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setSignupInput({
       ...singupInput,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if(!validator.isEmail(singupInput.email)) {
+      setError("the email you input is invalid");
+    }
+    
   }
 
   return (
@@ -57,8 +68,8 @@ function App() {
               onChange={handleChange}
             />
         </div>
-
-        <button type="submit">Submit</button>
+        {error && <p className='text-danger'>{error}</p>}
+        <button type="submit" className='btn btn-primary' onClick={handleClick}>Submit</button>
       </form>
     </div>
   );
